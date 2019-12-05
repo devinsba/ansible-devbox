@@ -1,6 +1,6 @@
-- hosts: devbox
+- hosts: local
   roles:
-#    - nvm
-#    - pyenv
-#    - rvm
+    - nvm
+    - pyenv
+    - rvm
     - sdkman
