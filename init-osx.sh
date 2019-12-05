@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+DOTFILES_REPO=git@github.com:devinsba/dotfiles.git
 
 if ! xcode-select -p > /dev/null 2>&1; then
   xcode-select --install
@@ -17,6 +18,7 @@ fi
 if ! brew commands > /dev/null 2>&1; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
 brew cask install iterm2
 
 #ZSH
@@ -30,9 +32,9 @@ brew tap thoughtbot/formulae
 brew install rcm
 
 #Dotfiles
-mkdir -p ${HOME}/.local/opt
-git clone git@github.com:devinsba/dotfiles.git "${HOME}/.local/opt/dotfiles"
-echo "DOTFILES_DIRS=\"${HOME}/.local/opt/dotfiles\"" > ~/.rcrc
-echo "TAGS=\"$(uname)\"" >> ~/.rcrc
+mkdir -p "${HOME}/.local/opt"
+git clone "${DOTFILES_REPO}" "${HOME}/.local/opt/dotfiles"
+echo "DOTFILES_DIRS=\"${HOME}/.local/opt/dotfiles\"" > "${HOME}/.rcrc"
+echo "TAGS=\"$(uname)\"" >> "${HOME}/.rcrc"
 
 rcup -vf
